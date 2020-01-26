@@ -1,0 +1,61 @@
+@import "../../../../../colors.scss";
+
+.card {
+  &Icon {
+    height: 30px;
+    width: 30px;
+    color: $primary;
+    cursor: pointer;
+  }
+
+  &Content {
+    padding: 10px !important;
+  }
+  &Details {
+    display: grid;
+    grid-template-columns: 30% auto;
+
+    .name {
+      font-weight: 700;
+      font-size: 1.6rem;
+    }
+
+    .profileInfo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &Description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    span {
+      color: $primary;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline;
+    }
+  }
+  p {
+    color: $font-grey;
+    font-size: 1.6rem;
+    margin-left: 10px;
+  }
+
+  &Bottom {
+    font-size: 1.6rem;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  &Img {
+    height: 40%;
+    width: 40%;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+}

@@ -1,0 +1,20 @@
+.modal {
+  height: 50vh;
+  width: 60%;
+  padding: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  color: black;
+  letter-spacing: 1.2px;
+  background: white;
+
+  .modalIcon {
+    height: 30px;
+    width: 30px;
+    margin-left: 97%;
+    cursor: pointer;
+  }
+}

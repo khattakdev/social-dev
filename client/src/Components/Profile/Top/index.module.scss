@@ -1,0 +1,112 @@
+@import "../../../colors.scss";
+
+.navLink {
+  color: $primary;
+  text-decoration: none;
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+.navLinkActive {
+  font-weight: bold;
+}
+
+.top {
+  margin: 5rem 0;
+  background: white;
+  .cover {
+    height: 25vw;
+    max-width: 100%;
+    background: url("../../../assets/images/cover.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 2rem;
+    height: 7rem;
+  }
+  ul {
+    padding: 0;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-between;
+    align-items: center;
+
+    li {
+      margin-right: 2.5rem;
+      font-size: 1.6rem;
+    }
+  }
+
+  .profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .hovereffect {
+      position: absolute;
+    }
+
+    .display {
+      position: absolute;
+      border-radius: 50%;
+      height: 130px;
+      width: 130px;
+      background: black;
+      top: -290%;
+      border: 5px solid white;
+      overflow: hidden;
+      cursor: pointer;
+
+      &:after {
+        content: "";
+        background: #313131;
+        opacity: 0.8;
+        height: 0px;
+        width: 130px;
+        bottom: 0%;
+        left: 0%;
+        position: absolute;
+        transition: all 0.2s ease-out;
+      }
+      &:hover:after {
+        content: "";
+
+        height: 130px;
+        width: 130px;
+      }
+
+      .camera {
+        color: #acacac;
+        height: 0%;
+        width: 0%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        visibility: hidden;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &:hover .camera {
+        height: 30%;
+        width: 30%;
+        visibility: visible;
+      }
+
+      .img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+}

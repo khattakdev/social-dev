@@ -1,0 +1,51 @@
+.Hero {
+  background: linear-gradient(
+      rgba(0, 184, 147, 0.712),
+      rgba(0, 184, 147, 0.712)
+    ),
+    url("../../assets/images/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  //   width: 99vw;
+  overflow-y: hidden;
+  //   padding: 1rem;
+  color: white;
+
+  padding-left: 0.86rem;
+}
+
+.Logo {
+  width: 100px;
+}
+
+.Center {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 85%;
+  //   padding: 0 20px;
+
+  .Text {
+    width: 55%;
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    p {
+      font-size: 20px;
+    }
+  }
+
+  .Auth {
+    height: 100%;
+    padding: 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

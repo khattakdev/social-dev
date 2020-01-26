@@ -1,0 +1,123 @@
+.navLink {
+  color: white;
+  text-decoration: none;
+}
+
+.Auth {
+  background: white;
+  min-height: 400px;
+  min-width: 340px;
+  color: black;
+  border-bottom-left-radius: 5px;
+  //   padding: 0 20px;
+  padding: 0 0 15px 0;
+  margin-top: -30px;
+
+  .Svg,
+  .SvgFocus {
+    height: 20px;
+    width: 20px;
+  }
+  .Svg {
+    fill: black;
+  }
+  .SvgFocus {
+    fill: #00b894;
+  }
+
+  .AuthSwitch {
+    display: flex;
+    width: 100%;
+    height: 50px;
+
+    .AuthButtonDeactive,
+    .AuthButtonActive {
+      text-align: center;
+      outline: none;
+      border: none;
+      width: 50%;
+      cursor: pointer;
+    }
+    .AuthbuttonDeactive {
+      background: #e8e8e8;
+    }
+    .AuthButtonActive {
+      background: white;
+      border-bottom: #00b894 2px solid;
+    }
+  }
+
+  .AuthContent {
+    padding: 0 20px;
+    .Head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .Back {
+        background: #00b894;
+        padding: 5px 10px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+
+        span {
+          margin-left: 5px;
+          font-weight: normal;
+        }
+      }
+    }
+    h2 {
+      font-size: 25px;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 20px;
+      border-bottom: #00b894 3px solid;
+    }
+
+    .Form {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+
+      .textField {
+        width: 100%;
+        height: 40px;
+      }
+
+      .ForgotPassword {
+        color: #ababab;
+        font-size: 15px;
+        margin-top: 10px;
+        // margin-bottom: 22px;
+      }
+
+      .Button {
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &Text {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+.fadein {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

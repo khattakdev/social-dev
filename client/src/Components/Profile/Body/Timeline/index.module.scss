@@ -1,0 +1,31 @@
+@import "../../../../colors.scss";
+
+.infoCard,
+.profileCard {
+  position: sticky;
+  top: 0;
+  .profiles {
+    padding: 1.3rem 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+}
+
+.info {
+  margin-left: 0px;
+
+  h4 {
+    margin-bottom: 2px;
+  }
+
+  p {
+    color: $font-grey;
+  }
+}

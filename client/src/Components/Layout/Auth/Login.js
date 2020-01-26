@@ -1,0 +1,39 @@
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "../Button/index";
+import classes from "./Auth.module.scss";
+import { Link } from "react-router-dom";
+const Index = () => {
+  return (
+    <div className={classes.fadein}>
+      <h2>Login</h2>
+
+      <div className={classes.Form}>
+        <TextField
+          id="outlined-email-input"
+          label="Your Email"
+          className={classes.textField}
+          type="email"
+          autoComplete="current-email"
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-password-input"
+          label="Your Password"
+          className={classes.textField}
+          type="password"
+          autoComplete="current-password"
+          margin="normal"
+          variant="outlined"
+        />
+        <span className={classes.ForgotPassword}>Forgot password?</span>
+        <Link className={classes.navLink} to="/profile">
+          <Button className={classes.Button}>Login</Button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Index;

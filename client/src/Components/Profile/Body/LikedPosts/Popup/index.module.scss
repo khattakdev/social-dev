@@ -1,0 +1,29 @@
+.popup {
+  // display: grid;
+  // grid-template-columns: 30% auto;
+  // margin-top: 20px;
+  overflow-y: auto !important;
+  height: 70vh !important;
+  &Content {
+    overflow-y: scroll;
+  }
+
+  .name {
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  .profileInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &Img {
+    height: 40%;
+    width: 40%;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+}

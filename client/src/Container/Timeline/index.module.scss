@@ -1,0 +1,71 @@
+@import "../../colors.scss";
+
+.timeline {
+  display: flex;
+  justify-content: space-between;
+
+  .info {
+    margin-left: 0px;
+
+    h4 {
+      margin-bottom: 2px;
+    }
+
+    p {
+      color: $font-grey;
+    }
+  }
+
+  h2 {
+    margin-bottom: 2.4rem;
+  }
+
+  .profiles {
+    padding: 1.3rem 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .image {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  .newpost {
+    margin-bottom: 5rem;
+
+    .top {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .textField {
+      border: 1px solid black;
+      width: 90%;
+      height: 15rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      margin-top: 1rem;
+      margin-left: auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      & > * {
+        border-radius: 0px;
+        height: 35px;
+        width: 80px;
+        margin-right: 2rem;
+      }
+
+      &__discard {
+        background: #809692;
+        margin-right: 0;
+      }
+    }
+  }
+}

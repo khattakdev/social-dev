@@ -1,0 +1,139 @@
+@import "../../../../../colors.scss";
+.post {
+  margin-bottom: 3rem;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.7rem;
+
+    h2 {
+      margin-bottom: 2px;
+    }
+
+    .image {
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    &__details {
+      margin-right: auto;
+    }
+
+    .dots {
+      height: 20px;
+      width: 20px;
+      cursor: pointer;
+      color: $font-grey;
+      transition: color 0.2s linear;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .menu {
+      position: relative;
+
+      &__options {
+        padding: 1rem;
+        z-index: 2;
+        background: white;
+        box-shadow: 2px 2px 10px 2px #afafaf5d;
+        border-radius: 5px;
+        position: absolute;
+        top: -10px;
+        left: -45px;
+      }
+    }
+  }
+
+  .body {
+    color: $font-grey-dark;
+    font-size: 1.5rem;
+  }
+  .divider {
+    margin: 2.5rem 0 1rem 0;
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .heart {
+      height: 20px;
+      width: 20px;
+      transition: all 0.2s linear;
+      color: $font-grey;
+      margin-right: 2.5rem;
+      cursor: pointer;
+
+      &:hover {
+        // transform: scale(1.2);
+        color: $primary;
+      }
+    }
+
+    .hearted {
+      margin-right: auto;
+    }
+
+    .comment {
+      height: 20px;
+      width: 20px;
+      fill: $font-grey;
+      transition: fill 0.2s linear;
+      cursor: pointer;
+
+      &:hover {
+        fill: $primary;
+      }
+    }
+  }
+
+  .comments {
+    .newPost {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .image {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+
+    .textField {
+      width: 77%;
+      font-size: 1.5rem;
+      height: 8rem;
+    }
+
+    .button {
+      margin: 1rem 0;
+      width: 7rem;
+      height: 3.4rem;
+    }
+
+    .comment {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+
+      &__Context {
+        width: 90%;
+        background: $comment-back;
+        border-radius: 5px;
+        padding: 10px;
+
+        span {
+          margin-right: 8px;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.navLink {
+  font-weight: bold;
+  font-size: 1.6rem;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+
+  .icon {
+    height: 30px;
+    width: 30px;
+    fill: white;
+    margin-right: 10px;
+  }
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem 3rem 0rem 2rem;
+  background: #00daaf;
+
+  .logo {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+
+    .image {
+      max-width: 25%;
+    }
+  }
+}

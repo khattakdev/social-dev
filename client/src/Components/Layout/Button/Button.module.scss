@@ -1,0 +1,18 @@
+.Button {
+  height: 50px;
+  width: 100%;
+  text-align: center;
+  background: #00b894;
+  color: white;
+  font-size: 19px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.disabled {
+  background: #bebebe !important;
+  color: #6e6e6e !important;
+  cursor: not-allowed !important;
+}

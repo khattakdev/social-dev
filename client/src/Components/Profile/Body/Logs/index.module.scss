@@ -1,0 +1,13 @@
+.card {
+  margin-bottom: 30px;
+  &Content {
+    padding: 10px 20px !important;
+  }
+}
+
+.log {
+  margin-top: 20px !important;
+  margin-bottom: 10px !important;
+  display: flex;
+  justify-content: space-between;
+}
