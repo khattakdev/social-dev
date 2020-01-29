@@ -6,6 +6,7 @@ const key = config.get("jwtKey");
 const uuidv4 = require("uuid/v4");
 const nodeMailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
+const { check, validationResult } = require("express-validator");
 
 const transporter = nodeMailer.createTransport(
   sendgridTransport({
@@ -21,6 +22,17 @@ const transporter = nodeMailer.createTransport(
 exports.updatePassword = async (req, res) => {
   const { verificationCode } = req.params;
   const { password, confirmPassword } = req.body;
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const errorArray = errors.array().map(error => {
+      return error.msg;
+    });
+    return res.status(422).json({
+      error: errorArray
+    });
+  }
 
   try {
     const user = await User.findOne({
@@ -40,7 +52,7 @@ exports.updatePassword = async (req, res) => {
 
     await user.save();
 
-    res.json({
+    res.status(200).json({
       msg: "Password Successfully Recovered"
     });
   } catch (error) {
@@ -164,6 +176,15 @@ exports.verifyEmail = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
 
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const errorArray = errors.array().map(error => {
+      return error.msg;
+    });
+    return res.status(422).json({
+      error: errorArray
+    });
+  }
   try {
     const user = await User.findOne({ email });
 
@@ -214,6 +235,17 @@ exports.register = async (req, res) => {
   } = req.body;
   const verificationCode = uuidv4();
   const currentDate = new Date().getTime();
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const errorArray = errors.array().map(error => {
+      return error.msg;
+    });
+    return res.status(422).json({
+      error: errorArray
+    });
+  }
 
   try {
     let user = await User.findOne({ email: email });
