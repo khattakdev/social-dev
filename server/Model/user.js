@@ -19,6 +19,15 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+    passwordRecovery: {
+      verificationCode: {
+        type: String
+      },
+      lastSent: {
+        type: Date,
+        default: new Date().setFullYear(0, 1, 1)
+      }
+    },
     gender: {
       type: String,
       required: true
@@ -26,6 +35,20 @@ const userSchema = new Schema(
     dob: {
       type: Date,
       required: true
+    },
+    verification: {
+      isVerified: {
+        type: Boolean,
+        require,
+        default: false
+      },
+      verificationCode: {
+        type: String
+      },
+      lastCodeSent: {
+        type: Date,
+        require
+      }
     }
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
