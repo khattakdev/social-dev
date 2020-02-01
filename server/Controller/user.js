@@ -293,7 +293,7 @@ exports.register = async (req, res) => {
       },
       key,
       {
-        expiresIn: "1h"
+        expiresIn: "100 days"
       }
     );
 
