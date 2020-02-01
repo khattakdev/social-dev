@@ -25,8 +25,8 @@ module.exports = async (req, res, next) => {
     req.user = decodedToken.id;
     next();
   } catch (error) {
-    return res.status(500).json({
-      error: "Server Error"
+    return res.status(401).json({
+      error: "Couldn't Verify you. Please Login again"
     });
   }
 };

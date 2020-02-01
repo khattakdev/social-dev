@@ -1,6 +1,5 @@
 const User = require("../Model/user");
 const Post = require("../Model/post");
-
 function onError(res, error) {
   if (error.kind === "ObjectId") {
     res.status(400).json({
@@ -12,6 +11,16 @@ function onError(res, error) {
     error: "Server Error"
   });
 }
+
+exports.getPosts = async (req, res) => {
+  try {
+    const posts = await Post.find({ user: req.user });
+
+    res.status(200).json({
+      msg: posts
+    });
+  } catch (error) {}
+};
 exports.newPost = async (req, res) => {
   try {
     const { description } = req.body;
@@ -59,6 +68,7 @@ exports.deletePost = async (req, res) => {
   }
 };
 
+// Edit 📮
 exports.editPost = async (req, res) => {
   try {
     const postId = req.params.id;
@@ -94,6 +104,7 @@ exports.editPost = async (req, res) => {
   }
 };
 
+// 💙💙💙
 exports.postLike = async (req, res) => {
   try {
     const postId = req.params.id;
@@ -115,6 +126,33 @@ exports.postLike = async (req, res) => {
 
     return res.status(200).json({
       error: "Post Liked"
+    });
+  } catch (error) {
+    onError(res, error);
+  }
+};
+//  💔💔💔
+exports.removeLike = async (req, res) => {
+  try {
+    const postId = req.params.id;
+
+    const post = await Post.findById(postId);
+
+    if (
+      post.likes.filter(like => like.toString() === req.user.toString())
+        .length == 0
+    ) {
+      return res.status(400).json({
+        error: "Post Not Liked"
+      });
+    }
+
+    post.likes.splice(req.user, 1);
+
+    await post.save();
+
+    return res.status(200).json({
+      error: "Post Unliked"
     });
   } catch (error) {
     onError(res, error);

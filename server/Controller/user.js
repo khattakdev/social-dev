@@ -203,7 +203,7 @@ exports.login = async (req, res) => {
         },
         key,
         {
-          expiresIn: "1h"
+          expiresIn: "30d"
         }
       );
 
