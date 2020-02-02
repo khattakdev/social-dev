@@ -1,5 +1,6 @@
 const User = require("../Model/user");
 const Post = require("../Model/post");
+const { validationResult } = require("express-validator");
 function onError(res, error) {
   if (error.kind === "ObjectId") {
     res.status(400).json({
@@ -22,6 +23,15 @@ exports.getPosts = async (req, res) => {
   } catch (error) {}
 };
 exports.newPost = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const errorArray = errors.array().map(error => {
+      return error.msg;
+    });
+    return res.status(422).json({
+      error: errorArray
+    });
+  }
   try {
     const { description } = req.body;
 
@@ -70,6 +80,15 @@ exports.deletePost = async (req, res) => {
 
 // Edit 📮
 exports.editPost = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const errorArray = errors.array().map(error => {
+      return error.msg;
+    });
+    return res.status(422).json({
+      error: errorArray
+    });
+  }
   try {
     const postId = req.params.id;
     const { description } = req.body;

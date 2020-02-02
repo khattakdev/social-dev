@@ -1,31 +1,33 @@
 const express = require("express");
-const Router = express.Router();
+const router = express.Router();
 const isAuth = require("../Middleware/auth");
 const postController = require("../Controller/post");
 const { body } = require("express-validator");
 
-Router.get("/get", isAuth, postController.getPosts);
-Router.post(
+router.get("/get", isAuth, postController.getPosts);
+router.post(
   "/new",
   [
     isAuth,
     body("description", "You must Provide Description")
+      .trim()
       .not()
       .isEmpty()
   ],
   postController.newPost
 );
-Router.post("/delete/:id", isAuth, postController.deletePost);
-Router.post(
+router.post("/delete/:id", isAuth, postController.deletePost);
+router.post(
   "/edit/:id",
   [
     isAuth,
     body("description", "You must Provide Description")
+      .trim()
       .not()
       .isEmpty()
   ],
   postController.editPost
 );
-Router.post("/like/:id", isAuth, postController.postLike);
-Router.post("/unlike/:id", isAuth, postController.removeLike);
-module.exports = Router;
+router.post("/like/:id", isAuth, postController.postLike);
+router.post("/unlike/:id", isAuth, postController.removeLike);
+module.exports = router;
