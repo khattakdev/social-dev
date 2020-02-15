@@ -38,5 +38,5 @@ app.use("/comment", commentRoute);
 // });
 
 connectDB(() => {
-  app.listen(8080, () => console.log("App Started"));
+  app.listen(8080);
 });

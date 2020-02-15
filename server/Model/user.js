@@ -32,6 +32,18 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+    logs: [
+      {
+        message: {
+          type: String,
+          require
+        },
+        date: {
+          type: Date,
+          require
+        }
+      }
+    ],
     dob: {
       type: Date,
       required: true

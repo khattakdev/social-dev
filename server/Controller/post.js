@@ -39,8 +39,16 @@ exports.newPost = async (req, res) => {
       user: req.user,
       description
     });
-    await post.save();
 
+    const user = await User.findById(req.user);
+
+    user.logs.push({
+      message: "You created a new post",
+      date: new Date()
+    });
+
+    await post.save();
+    await user.save();
     return res.status(200).json({
       msg: "Post Created Successfully"
     });
@@ -68,8 +76,13 @@ exports.deletePost = async (req, res) => {
       });
     }
 
-    await post.remove();
+    user.logs.push({
+      message: "You deleted a post",
+      date: new Date().getTime
+    });
 
+    await post.remove();
+    await user.save();
     return res.status(200).json({
       msg: "Post Deleted Successfully"
     });
@@ -99,6 +112,13 @@ exports.editPost = async (req, res) => {
     }
     const post = await Post.findById(postId);
 
+    const user = await User.findById(req.user);
+
+    user.logs.push({
+      message: "You edited a post",
+      date: new Date().getTime
+    });
+
     if (!post) {
       return res.status(404).json({
         error: "Invalid Post"
@@ -114,6 +134,7 @@ exports.editPost = async (req, res) => {
     post.description = description;
 
     await post.save();
+    await user.save();
 
     return res.status(200).json({
       msg: "Post Updated Successfully"
@@ -139,10 +160,17 @@ exports.postLike = async (req, res) => {
       });
     }
 
+    const user = await User.findById(req.user);
+
+    user.logs.push({
+      message: "You liked a post",
+      date: new Date().getTime
+    });
+
     post.likes.push(req.user);
 
     await post.save();
-
+    await user.save();
     return res.status(200).json({
       error: "Post Liked"
     });
@@ -166,9 +194,17 @@ exports.removeLike = async (req, res) => {
       });
     }
 
+    const user = await User.findById(req.user);
+
+    user.logs.push({
+      message: "You unliked a post",
+      date: new Date().getTime
+    });
+
     post.likes.splice(req.user, 1);
 
     await post.save();
+    await user.save();
 
     return res.status(200).json({
       error: "Post Unliked"

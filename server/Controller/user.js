@@ -6,7 +6,7 @@ const key = config.get("jwtKey");
 const uuidv4 = require("uuid/v4");
 const nodeMailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
-const { check, validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 
 const transporter = nodeMailer.createTransport(
   sendgridTransport({
@@ -109,6 +109,7 @@ exports.forgetPassword = async (req, res) => {
       new Date(user.passwordRecovery.lastSent).getDate() + 1
     );
 
+    console.log(currentTime, new Date(newDateForDB));
     if (currentTime > new Date(newDateForDB)) {
       const verificationCode = uuidv4();
       user.passwordRecovery = {
@@ -300,6 +301,135 @@ exports.register = async (req, res) => {
     res.json({
       msg: "Account Successfully Created",
       token
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({
+      error: "Server Error"
+    });
+  }
+};
+
+exports.likeProfile = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const profile = await User.findById(userId);
+
+    if (!profile) {
+      return res.json(404).json({
+        error: "Profile Not Found"
+      });
+    }
+
+    const user = await User.findById(req.user);
+
+    if (!user) {
+      return res.status(404).json({
+        error: "Couldn't Verify you, Please Login again"
+      });
+    }
+
+    if (
+      user.likedProfiles.filter(
+        prof => prof.toString() === profile._id.toString()
+      ) > 1
+    ) {
+      return res.status(400).json({
+        error: "Profile Already Liked"
+      });
+    }
+
+    user.likedProfiles.push(profile._id);
+    user.logs.push({
+      message: "You liked a profile",
+      date: new Date().getTime
+    });
+
+    await user.save();
+
+    return res.status(200).json({
+      msg: "Profile Liked"
+    });
+  } catch (error) {
+    if (error.kind === "ObjectId") {
+      res.status(400).json({
+        error: `No Profile found`
+      });
+    }
+    console.log(error.message);
+    res.status(500).json({
+      error: "Server Error"
+    });
+  }
+};
+
+exports.unlikeProfile = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const profile = await User.findById(userId);
+
+    if (!profile) {
+      return res.json(404).json({
+        error: "Profile Not Found"
+      });
+    }
+
+    const user = await User.findById(req.user);
+
+    if (!user) {
+      return res.status(404).json({
+        error: "Couldn't Verify you, Please Login again"
+      });
+    }
+
+    if (
+      user.likedProfiles.filter(
+        prof => prof.toString() === profile._id.toString()
+      ) === 0
+    ) {
+      return res.status(400).json({
+        error: "Profile Not Liked Yet"
+      });
+    }
+
+    user.likedProfiles.pop(profile._id);
+    user.logs.push({
+      message: "You liked a profile",
+      date: new Date().getTime
+    });
+
+    await user.save();
+
+    return res.status(200).json({
+      msg: "Profile Liked"
+    });
+  } catch (error) {
+    if (error.kind === "ObjectId") {
+      res.status(400).json({
+        error: `No Profile found`
+      });
+    }
+    console.log(error.message);
+    res.status(500).json({
+      error: "Server Error"
+    });
+  }
+};
+
+exports.getAllLikedProfiles = async (req, res) => {
+  try {
+    const user = await user.findById(req.user);
+
+    if (!user) {
+      return res.status(404).json({
+        error: "Couldn't Verify you, Please Login again"
+      });
+    }
+
+    return res.status(200).json({
+      msg: user.likedProfiles
     });
   } catch (error) {
     console.log(error.message);

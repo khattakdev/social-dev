@@ -50,5 +50,7 @@ router.put(
   }),
   userController.updatePassword
 );
+router.post("/like/:userId", userController.likeProfile);
+router.post("/unlike/:userId", userController.unlikeProfile);
 
 module.exports = router;

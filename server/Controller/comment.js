@@ -6,7 +6,7 @@ const { validationResult } = require("express-validator");
 function onError(res, error, type) {
   if (error.kind === "ObjectId") {
     res.status(400).json({
-      error: `No ${type} found"`
+      error: `No ${type} found`
     });
   }
   console.log(error.message);
@@ -40,6 +40,11 @@ exports.postComment = async (req, res) => {
 
     const user = await User.findById(req.user);
 
+    user.logs.push({
+      message: "You posted a comment",
+      date: new Date().getTime
+    });
+
     if (!user) {
       return res.status(401).json({
         error: "Couldn't Recognize you. Please Login again"
@@ -56,7 +61,7 @@ exports.postComment = async (req, res) => {
 
     await comment.save();
     await post.save();
-
+    await user.save();
     return res.status(200).json({
       msg: "You Commented"
     });
@@ -91,7 +96,13 @@ exports.removeComment = async (req, res) => {
       });
     }
 
+    user.logs.push({
+      message: "You removed a comment",
+      date: new Date().getTime
+    });
+
     await comment.remove();
+    await user.save();
 
     res.status(200).json({
       msg: "Comment Deleted"
@@ -126,6 +137,11 @@ exports.updateComment = async (req, res) => {
 
     const user = await User.findById(req.user);
 
+    user.logs.push({
+      message: "You updated a comment",
+      date: new Date().getTime
+    });
+
     if (!user) {
       return res.status(401).json({
         error: "Couldn't Recognize you. Please Login again"
@@ -141,6 +157,7 @@ exports.updateComment = async (req, res) => {
     comment.description = description;
 
     await comment.save();
+    await user.save();
 
     res.status(200).json({
       msg: "Comment Updated"
