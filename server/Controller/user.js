@@ -17,6 +17,26 @@ const transporter = nodeMailer.createTransport(
   })
 );
 
+// Update Photo
+exports.updatePhoto = async (req, res) => {
+  try {
+    console.log(req.file);
+    const user = await User.findById(req.user);
+
+    user.image = `uploads/${req.file.filename}`;
+
+    await user.save();
+    res.json({
+      msg: "Image Uploaded Successfully"
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      error: "Server Error"
+    });
+  }
+};
+
 // Update Password
 
 exports.updatePassword = async (req, res) => {

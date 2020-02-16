@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, Component } from "react";
+import React, { Fragment, Component } from "react";
 import { Card, Divider } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import classes from "./index.module.scss";

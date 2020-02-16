@@ -32,6 +32,11 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+    image: {
+      type: String,
+      default: "None",
+      require
+    },
     logs: [
       {
         message: {
