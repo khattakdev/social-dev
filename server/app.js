@@ -1,6 +1,7 @@
 const express = require("express");
 const connectDB = require("./config/db");
 // Routes
+const authRoute = require("./Routes/auth");
 const userRoute = require("./Routes/user");
 const postRoute = require("./Routes/post");
 const commentRoute = require("./Routes/comment");
@@ -11,7 +12,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use("/uploads/", express.static("uploads"));
 
-app.use("/user", userRoute);
+app.use("/auth", authRoute);
+// app.use("/user", userRoute);
 app.use("/post", postRoute);
 app.use("/comment", commentRoute);
 

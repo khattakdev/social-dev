@@ -19,15 +19,6 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    passwordRecovery: {
-      verificationCode: {
-        type: String
-      },
-      lastSent: {
-        type: Date,
-        default: new Date().setFullYear(0, 1, 1)
-      }
-    },
     gender: {
       type: String,
       required: true
@@ -52,6 +43,27 @@ const userSchema = new Schema(
     dob: {
       type: Date,
       required: true
+    },
+    likedProfiles: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      }
+    ],
+    likedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Posts"
+      }
+    ],
+    passwordRecovery: {
+      verificationCode: {
+        type: String
+      },
+      lastSent: {
+        type: Date,
+        default: new Date().setFullYear(0, 1, 1)
+      }
     },
     verification: {
       isVerified: {

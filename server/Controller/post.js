@@ -42,6 +42,12 @@ exports.newPost = async (req, res) => {
 
     const user = await User.findById(req.user);
 
+    if (!user) {
+      res.status(404).json({
+        error: "User not found"
+      });
+    }
+
     user.logs.push({
       message: "You created a new post",
       date: new Date()
@@ -164,10 +170,11 @@ exports.postLike = async (req, res) => {
 
     user.logs.push({
       message: "You liked a post",
-      date: new Date().getTime
+      date: new Date().getTime()
     });
 
     post.likes.push(req.user);
+    user.likedPosts.push(post._id);
 
     await post.save();
     await user.save();
@@ -185,6 +192,12 @@ exports.removeLike = async (req, res) => {
 
     const post = await Post.findById(postId);
 
+    if (!post) {
+      return res.status(404).json({
+        error: "Post not found"
+      });
+    }
+
     if (
       post.likes.filter(like => like.toString() === req.user.toString())
         .length == 0
@@ -196,12 +209,25 @@ exports.removeLike = async (req, res) => {
 
     const user = await User.findById(req.user);
 
+    if (!user) {
+      return req.status(404).json({
+        error: "User not found"
+      });
+    }
+
+    const userIndex = user.likedPosts.findIndex(
+      post => postId.toString() === post.toString()
+    );
+    const postIndex = post.likes.findIndex(
+      user => user.toString() === req.user.toString()
+    );
     user.logs.push({
       message: "You unliked a post",
-      date: new Date().getTime
+      date: new Date().getTime()
     });
 
-    post.likes.splice(req.user, 1);
+    post.likes.splice(postIndex, 1);
+    user.likedPosts.splice(userIndex, 1);
 
     await post.save();
     await user.save();

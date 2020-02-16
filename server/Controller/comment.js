@@ -42,7 +42,7 @@ exports.postComment = async (req, res) => {
 
     user.logs.push({
       message: "You posted a comment",
-      date: new Date().getTime
+      date: new Date().getTime()
     });
 
     if (!user) {
@@ -78,7 +78,15 @@ exports.removeComment = async (req, res) => {
 
     if (!comment) {
       return res.status(404).json({
-        error: "Couldn't Find Comment"
+        error: "No comment found"
+      });
+    }
+
+    const post = await Post.findById(comment.post);
+
+    if (!post) {
+      return res.status(404).json({
+        error: "Comment's Post doesn't exist  "
       });
     }
 
@@ -96,13 +104,19 @@ exports.removeComment = async (req, res) => {
       });
     }
 
+    const commentIndex = post.comments.findIndex(
+      comIndex => comIndex.toString() === commentId.toString()
+    );
+
     user.logs.push({
       message: "You removed a comment",
-      date: new Date().getTime
+      date: new Date().getTime()
     });
 
+    post.comments.splice(commentIndex, 1);
     await comment.remove();
     await user.save();
+    await post.save();
 
     res.status(200).json({
       msg: "Comment Deleted"
@@ -139,7 +153,7 @@ exports.updateComment = async (req, res) => {
 
     user.logs.push({
       message: "You updated a comment",
-      date: new Date().getTime
+      date: new Date().getTime()
     });
 
     if (!user) {
