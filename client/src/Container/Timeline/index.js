@@ -34,11 +34,11 @@ export default class index extends Component {
   render() {
     return (
       <Fragment>
-        <Grid container className={classes.timeline} spacing={3}>
+        <Grid container className={classes.timeline} spacing={1}>
           <Grid item xs={12} md={3}>
             <Info />
           </Grid>
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} md={6}>
             <Card className={classes.newpost}>
               <CardContent>
                 <Typography

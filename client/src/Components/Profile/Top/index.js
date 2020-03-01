@@ -44,6 +44,11 @@ const index = () => {
         <div className={classes.profile}>
           <div className={classes.display}>
             <Camera className={classes.camera} />
+            <input
+              className={classes.upload_btn}
+              type="file"
+              onChange={() => alert("Changed!!!")}
+            />
             <img className={classes.img} src={profile} alt="Profile" />
           </div>
           <h2>Arsalan Khattak</h2>

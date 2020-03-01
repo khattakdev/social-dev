@@ -111,7 +111,7 @@ export default class index extends Component {
                   checked={this.state.leavingDate.current}
                   onClick={this.checkBoxHandler}
                 />
-                Currently Working
+                <p className={classes.label}>Currently Working</p>
               </label>
               <TextField
                 id="outlined-date-input"
@@ -144,9 +144,11 @@ export default class index extends Component {
               />
             </Typography>
           </Typography>
-          <Button className={classes.btn_save} onClick={this.props.onSave}>
-            Save
-          </Button>
+          <Typography className={classes.btns} component="div">
+            <Button className={classes.btn_save} onClick={this.props.onSave}>
+              Save
+            </Button>
+          </Typography>
         </Typography>
       </Popup>
     );

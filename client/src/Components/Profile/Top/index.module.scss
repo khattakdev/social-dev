@@ -95,11 +95,27 @@
         visibility: hidden;
         transition: all 0.2s ease-in-out;
       }
+      .upload_btn {
+        height: 0%;
+        width: 0%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        visibility: visible;
+      }
 
       &:hover .camera {
         height: 30%;
         width: 30%;
         visibility: visible;
+      }
+      &:hover .upload_btn {
+        height: 100%;
+        width: 100%;
+        display: hidden;
+        opacity: 0;
       }
 
       .img {

@@ -111,7 +111,11 @@ export default class index extends Component {
               />
             </Typography>
           </Typography>
-          <Button onClick={this.props.onSave}>Save</Button>
+          <Typography className={classes.btns} component="div">
+            <Button className={classes.btn_save} onClick={this.props.onSave}>
+              Save
+            </Button>
+          </Typography>
         </Typography>
       </Popup>
     );
