@@ -10,6 +10,8 @@ import Button from "../../Components/Layout/Button";
 // import Popup from "../../../Layout/Popup";
 import Info from "../../Components/Profile/Body/About/info";
 import InfoPopup from "../../Components/Profile/Body/About/Popup/basic";
+import EmployementPopup from "../../Components/Profile/Body/About/Popup/employment";
+import EducationPopup from "../../Components/Profile/Body/About/Popup/education";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { ReactComponent as AddIcon } from "../../assets/icons/add.svg";
@@ -22,6 +24,12 @@ export default class index extends Component {
         isEditMode: false
       },
       info: {
+        isEditMode: false
+      },
+      employment: {
+        isEditMode: false
+      },
+      education: {
         isEditMode: false
       }
     };
@@ -41,12 +49,25 @@ export default class index extends Component {
     return (
       <Fragment>
         {/* <AboutPopup /> */}
+        {this.state.employment.isEditMode && (
+          <EmployementPopup
+            onClose={() => this.onEditHandler("employment")}
+            onSave={() => this.onEditHandler("employment")}
+          />
+        )}
+        {this.state.education.isEditMode && (
+          <EducationPopup
+            onClose={() => this.onEditHandler("education")}
+            onSave={() => this.onEditHandler("education")}
+          />
+        )}
         {this.state.info.isEditMode && (
           <InfoPopup
             onClose={() => this.onEditHandler("info")}
             onSave={() => this.onEditHandler("info")}
           />
         )}
+        {/* <ConfirmationPop /> */}
         <Grid container className={classes.timeline} spacing={3}>
           <Grid item xs={12} md={3}>
             <Info editClick={() => this.onEditHandler("info")} />
@@ -110,7 +131,10 @@ export default class index extends Component {
                 >
                   <span></span>
                   <h2>Employment</h2>
-                  <AddIcon className={classes.icon} />
+                  <AddIcon
+                    className={classes.icon}
+                    onClick={() => this.onEditHandler("employment")}
+                  />
                 </Typography>
                 <Divider />
 
@@ -119,7 +143,10 @@ export default class index extends Component {
                     <h4>MetaLab Agency</h4>
                     <Typography className={classes.icons} component="div">
                       <DeleteIcon className={classes.icon} />
-                      <EditIcon className={classes.icon} />
+                      <EditIcon
+                        className={classes.icon}
+                        onClick={() => this.onEditHandler("employment")}
+                      />
                     </Typography>
                     <p>UI/UX Designer</p>
                   </Typography>
@@ -184,7 +211,10 @@ export default class index extends Component {
                 >
                   <span></span>
                   <h2>Education</h2>
-                  <AddIcon className={classes.icon} />
+                  <AddIcon
+                    className={classes.icon}
+                    onClick={() => this.onEditHandler("education")}
+                  />
                 </Typography>
                 <Divider />
 
@@ -193,7 +223,10 @@ export default class index extends Component {
                     <h4>Stanford University</h4>
                     <Typography className={classes.icons} component="div">
                       <DeleteIcon className={classes.icon} />
-                      <EditIcon className={classes.icon} />
+                      <EditIcon
+                        className={classes.icon}
+                        onClick={() => this.onEditHandler("education")}
+                      />
                     </Typography>
                     <p>(BS) CS</p>
                   </Typography>
@@ -219,7 +252,10 @@ export default class index extends Component {
                     <h4>Whitney High School</h4>
                     <Typography className={classes.icons} component="div">
                       <DeleteIcon className={classes.icon} />
-                      <EditIcon className={classes.icon} />
+                      <EditIcon
+                        className={classes.icon}
+                        onClick={() => this.onEditHandler("education")}
+                      />
                     </Typography>
                     <p>Computer Science</p>
                   </Typography>

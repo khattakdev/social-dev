@@ -8,6 +8,7 @@ const index = props => {
       id={props.id}
       name={props.name}
       defaultValue={props.defaultValue}
+      onChange={props.onChange}
     >
       {props.values.map(value => (
         <option key={value.val} value={value.val}>

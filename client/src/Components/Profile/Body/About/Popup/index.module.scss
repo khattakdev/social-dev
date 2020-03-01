@@ -1,3 +1,4 @@
+@import "../../../../../colors.scss";
 .about {
   box-sizing: border-box;
   width: 100%;
@@ -5,21 +6,80 @@
   margin-bottom: 10px;
 }
 
-.content {
+.basic {
   &_data {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
+  .info {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .input {
+      margin-right: 30px;
+    }
+  }
 }
 
-.info {
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.employment {
+  width: 80% !important;
+}
+.experience {
+  &_data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .info {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .input {
+      margin-right: 30px;
+      width: 52%;
+    }
+    .input_area {
+      margin-right: 30px;
+      width: 75%;
+      margin-bottom: 4rem;
+      height: 100px;
+    }
+  }
+  .info_area {
+    width: 100%;
+  }
+  .btn_save {
+    width: 98%;
+  }
+}
 
-  .input {
-    margin-right: 30px;
+.confirmation {
+  min-height: 20px !important;
+  // width: 40rem;
+  // display: flex;
+  // align-items: center;
+
+  .buttons {
+    width: 50%;
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+
+    & > * {
+      width: 100px;
+      margin-right: 20px;
+    }
+  }
+
+  .delete {
+    background-color: red;
+    width: 100px;
+  }
+  .cancel {
+    background-color: $font-grey-dark;
   }
 }
