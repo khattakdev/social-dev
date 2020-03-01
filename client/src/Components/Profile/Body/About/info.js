@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { ReactComponent as EditIcon } from "../../../../assets/icons/edit.svg";
-const index = () => {
+const index = props => {
   return (
     <Fragment>
       <Card>
@@ -17,7 +17,7 @@ const index = () => {
           >
             <span></span>
             <h2>Basic Info</h2>
-            <EditIcon className={classes.icon} />
+            <EditIcon onClick={props.editClick} className={classes.icon} />
           </Typography>
           <Divider />
           <Typography component="div" className={classes.info}>

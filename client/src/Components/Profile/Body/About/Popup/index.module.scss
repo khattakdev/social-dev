@@ -4,3 +4,22 @@
   height: 53%;
   margin-bottom: 10px;
 }
+
+.content {
+  &_data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.info {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .input {
+    margin-right: 30px;
+  }
+}

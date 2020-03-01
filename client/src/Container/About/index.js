@@ -9,7 +9,7 @@ import TextField from "../../Components/Layout/TextArea";
 import Button from "../../Components/Layout/Button";
 // import Popup from "../../../Layout/Popup";
 import Info from "../../Components/Profile/Body/About/info";
-import AboutPopup from "../../Components/Profile/Body/About/Popup/about";
+import InfoPopup from "../../Components/Profile/Body/About/Popup/basic";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { ReactComponent as AddIcon } from "../../assets/icons/add.svg";
@@ -20,17 +20,20 @@ export default class index extends Component {
       about: {
         value: `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with release of Letraset`,
         isEditMode: false
+      },
+      info: {
+        isEditMode: false
       }
     };
 
-    this.onAboutEditHandler = this.onAboutEditHandler.bind(this);
+    this.onEditHandler = this.onEditHandler.bind(this);
   }
   // About Handlers
-  onAboutEditHandler = () => {
+  onEditHandler = name => {
     this.setState(prevState => ({
-      about: {
-        ...this.state.about,
-        isEditMode: !prevState.about.isEditMode
+      [name]: {
+        ...this.state[name],
+        isEditMode: !prevState[name].isEditMode
       }
     }));
   };
@@ -38,9 +41,15 @@ export default class index extends Component {
     return (
       <Fragment>
         {/* <AboutPopup /> */}
+        {this.state.info.isEditMode && (
+          <InfoPopup
+            onClose={() => this.onEditHandler("info")}
+            onSave={() => this.onEditHandler("info")}
+          />
+        )}
         <Grid container className={classes.timeline} spacing={3}>
           <Grid item xs={12} md={3}>
-            <Info />
+            <Info editClick={() => this.onEditHandler("info")} />
           </Grid>
           <Grid item xs={12} md={9}>
             {/* About ME */}
@@ -56,7 +65,7 @@ export default class index extends Component {
                   <span className={classes.editSpan}>
                     {this.state.about.isEditMode ? null : (
                       <EditIcon
-                        onClick={this.onAboutEditHandler}
+                        onClick={() => this.onEditHandler("about")}
                         className={classes.icon}
                       />
                     )}
@@ -72,9 +81,11 @@ export default class index extends Component {
                         value={this.state.about.value}
                       />
                       <Typography component="div" className={classes.buttons}>
-                        <Button onClick={this.onAboutEditHandler}>Save</Button>
+                        <Button onClick={() => this.onEditHandler("about")}>
+                          Save
+                        </Button>
                         <Button
-                          onClick={this.onAboutEditHandler}
+                          onClick={() => this.onEditHandler("about")}
                           className={classes.buttons__discard}
                         >
                           Discard
