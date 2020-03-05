@@ -1,12 +1,10 @@
-import React, { Component, Fragment, useState, useEffect } from "react";
+import React, { Component, Fragment } from "react";
 import { Card, Divider } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import classes from "./index.module.scss";
-import Typography from "@material-ui/core/Typography";
-import CardContent from "@material-ui/core/CardContent";
-// import image from "../../../../assets/images/dp.jpg";
-import TextField from "../../Components/Layout/TextArea";
-import Button from "../../Components/Layout/Button";
+import About from "./Components/About";
+import Employment from "./Components/Employment";
+import Education from "./Components/Education";
 // import Popup from "../../../Layout/Popup";
 import Info from "../../Components/Profile/Body/About/info";
 import InfoPopup from "../../Components/Profile/Body/About/Popup/basic";
@@ -48,7 +46,6 @@ export default class index extends Component {
   render() {
     return (
       <Fragment>
-        {/* <AboutPopup /> */}
         {this.state.employment.isEditMode && (
           <EmployementPopup
             onClose={() => this.onEditHandler("employment")}
@@ -67,216 +64,27 @@ export default class index extends Component {
             onSave={() => this.onEditHandler("info")}
           />
         )}
-        {/* <ConfirmationPop /> */}
+
         <Grid container className={classes.timeline} spacing={3}>
-          <Grid item xs={12} md={3}>
+          <Grid className={classes.info_card} item xs={12} md={3}>
             <Info editClick={() => this.onEditHandler("info")} />
           </Grid>
           <Grid item xs={12} md={9}>
             {/* About ME */}
-            <Card className={classes.card}>
-              <CardContent>
-                <Typography
-                  className={classes.aboutHead}
-                  component="div"
-                  align="right"
-                >
-                  <span></span>
-                  <h2>About Me</h2>
-                  <span className={classes.editSpan}>
-                    {this.state.about.isEditMode ? null : (
-                      <EditIcon
-                        onClick={() => this.onEditHandler("about")}
-                        className={classes.icon}
-                      />
-                    )}
-                  </span>
-                </Typography>
-                <Divider />
-                <Typography component="div" align="right"></Typography>
-                <Typography component="div" className={classes.about}>
-                  {this.state.about.isEditMode ? (
-                    <Fragment>
-                      <TextField
-                        className={classes.aboutTextField}
-                        value={this.state.about.value}
-                      />
-                      <Typography component="div" className={classes.buttons}>
-                        <Button onClick={() => this.onEditHandler("about")}>
-                          Save
-                        </Button>
-                        <Button
-                          onClick={() => this.onEditHandler("about")}
-                          className={classes.buttons__discard}
-                        >
-                          Discard
-                        </Button>
-                      </Typography>
-                    </Fragment>
-                  ) : (
-                    <p>{this.state.about.value}</p>
-                  )}
-                </Typography>
-              </CardContent>
-            </Card>
-
+            <About
+              about={this.state.about}
+              onClick={() => this.onEditHandler("about")}
+            />
             {/* Employement */}
-
-            <Card className={classes.card}>
-              <CardContent>
-                <Typography
-                  className={classes.employmentHead}
-                  component="div"
-                  align="center"
-                >
-                  <span></span>
-                  <h2>Employment</h2>
-                  <AddIcon
-                    className={classes.icon}
-                    onClick={() => this.onEditHandler("employment")}
-                  />
-                </Typography>
-                <Divider />
-
-                <Typography component="div" className={classes.employment}>
-                  <Typography component="div" className={classes.employmentTop}>
-                    <h4>MetaLab Agency</h4>
-                    <Typography className={classes.icons} component="div">
-                      <DeleteIcon className={classes.icon} />
-                      <EditIcon
-                        className={classes.icon}
-                        onClick={() => this.onEditHandler("employment")}
-                      />
-                    </Typography>
-                    <p>UI/UX Designer</p>
-                  </Typography>
-                  <Typography
-                    component="div"
-                    className={classes.employmentDate}
-                  >
-                    <p>2nd January - Present</p>
-                  </Typography>
-                  <Typography
-                    component="div"
-                    className={classes.employmentDetail}
-                  >
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </p>
-                  </Typography>
-                </Typography>
-
-                <Typography component="div" className={classes.employment}>
-                  <Typography component="div" className={classes.employmentTop}>
-                    <h4>MetaLab Agency</h4>
-                    <Typography className={classes.icons} component="div">
-                      <DeleteIcon className={classes.icon} />
-                      <EditIcon className={classes.icon} />
-                    </Typography>
-                    <p>UI/UX Designer</p>
-                  </Typography>
-                  <Typography
-                    component="div"
-                    className={classes.employmentDate}
-                  >
-                    <p>2nd January - Present</p>
-                  </Typography>
-                  <Typography
-                    component="div"
-                    className={classes.employmentDetail}
-                  >
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </p>
-                  </Typography>
-                </Typography>
-              </CardContent>
-            </Card>
-
+            <Employment
+              editClick={() => this.onEditHandler("employment")}
+              addClick={() => this.onEditHandler("employment")}
+            />
             {/* Education */}
-            <Card className={classes.card}>
-              <CardContent>
-                <Typography
-                  className={classes.educationHead}
-                  component="div"
-                  align="center"
-                >
-                  <span></span>
-                  <h2>Education</h2>
-                  <AddIcon
-                    className={classes.icon}
-                    onClick={() => this.onEditHandler("education")}
-                  />
-                </Typography>
-                <Divider />
-
-                <Typography component="div" className={classes.education}>
-                  <Typography component="div" className={classes.educationTop}>
-                    <h4>Stanford University</h4>
-                    <Typography className={classes.icons} component="div">
-                      <DeleteIcon className={classes.icon} />
-                      <EditIcon
-                        className={classes.icon}
-                        onClick={() => this.onEditHandler("education")}
-                      />
-                    </Typography>
-                    <p>(BS) CS</p>
-                  </Typography>
-                  <Typography component="div" className={classes.educationDate}>
-                    <p>2nd January - Present</p>
-                  </Typography>
-                  <Typography
-                    component="div"
-                    className={classes.educationDetail}
-                  >
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </p>
-                  </Typography>
-                </Typography>
-
-                <Typography component="div" className={classes.education}>
-                  <Typography component="div" className={classes.educationTop}>
-                    <h4>Whitney High School</h4>
-                    <Typography className={classes.icons} component="div">
-                      <DeleteIcon className={classes.icon} />
-                      <EditIcon
-                        className={classes.icon}
-                        onClick={() => this.onEditHandler("education")}
-                      />
-                    </Typography>
-                    <p>Computer Science</p>
-                  </Typography>
-                  <Typography component="div" className={classes.educationDate}>
-                    <p>2nd January - Present</p>
-                  </Typography>
-                  <Typography
-                    component="div"
-                    className={classes.educationDetail}
-                  >
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </p>
-                  </Typography>
-                </Typography>
-              </CardContent>
-            </Card>
+            <Education
+              addClick={() => this.onEditHandler("education")}
+              editClick={() => this.onEditHandler("education")}
+            />
           </Grid>
         </Grid>
       </Fragment>

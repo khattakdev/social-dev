@@ -8,7 +8,7 @@ import { ReactComponent as EditIcon } from "../../../../assets/icons/edit.svg";
 const index = props => {
   return (
     <Fragment>
-      <Card>
+      <Card class={classes.infoCard}>
         <CardContent>
           <Typography
             className={classes.aboutHead}
