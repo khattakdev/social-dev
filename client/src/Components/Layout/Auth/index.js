@@ -5,37 +5,37 @@ import Login from "./Login";
 import Signup from "./Signup";
 import classes from "./Auth.module.scss";
 
-const Index = () => {
-  const [authState, setLogin] = useState(true);
-  console.log(authState);
+const Index = props => {
   return (
     <div className={classes.Auth}>
       <div className={classes.AuthSwitch}>
         <button
           className={
-            authState ? classes.AuthButtonActive : classes.AuthButtonDeactive
+            props.authState
+              ? classes.AuthButtonActive
+              : classes.AuthButtonDeactive
           }
-          onClick={() => setLogin(true)}
+          onClick={props.tweakAuth}
         >
-          <LoginIcon className={authState ? classes.SvgFocus : classes.Svg} />
+          <LoginIcon
+            className={props.authState ? classes.SvgFocus : classes.Svg}
+          />
         </button>
         <button
           className={
-            authState ? classes.AuthButtonDeactive : classes.AuthButtonActive
+            props.authState
+              ? classes.AuthButtonDeactive
+              : classes.AuthButtonActive
           }
-          onClick={() => setLogin(false)}
+          onClick={props.tweakAuth}
         >
           <RegisterIcon
-            className={authState ? classes.Svg : classes.SvgFocus}
+            className={props.authState ? classes.Svg : classes.SvgFocus}
           />
         </button>
       </div>
 
-      <div className={classes.AuthContent}>
-        {authState ? <Login /> : <Signup className={classes.fadein} />}
-        {/* <Login /> */}
-        {/* <Signup /> */}
-      </div>
+      <div className={classes.AuthContent}>{props.children}</div>
     </div>
   );
 };

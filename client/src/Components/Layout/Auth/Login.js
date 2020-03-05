@@ -2,8 +2,9 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "../Button/index";
 import classes from "./Auth.module.scss";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 const Index = () => {
+  const login = () => {};
   return (
     <div className={classes.fadein}>
       <h2>Login</h2>
@@ -28,9 +29,9 @@ const Index = () => {
           variant="outlined"
         />
         <span className={classes.ForgotPassword}>Forgot password?</span>
-        <Link className={classes.navLink} to="/profile">
-          <Button className={classes.Button}>Login</Button>
-        </Link>
+        <Button onClick={login} className={classes.Button}>
+          Login
+        </Button>
       </div>
     </div>
   );

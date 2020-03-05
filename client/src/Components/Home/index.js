@@ -1,9 +1,8 @@
 import React from "react";
-import Auth from "../Layout/Auth/index";
 import Logo from "../../assets/images/logo-white.png";
 import classes from "./Home.module.scss";
 
-const Home = () => {
+const Home = props => {
   return (
     <div className={classes.Hero}>
       <img src={Logo} className={classes.Logo} alt="Logo" />
@@ -18,9 +17,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className={classes.Auth}>
-          <Auth />
-        </div>
+        <div className={classes.Auth}>{props.children}</div>
       </div>
     </div>
   );

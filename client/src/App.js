@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./Components/Home";
+import Home from "./Container/Home";
 import Profile from "./Components/Profile";
 import Timeline from "./Container/Timeline";
 import Profiles from "./Components/Profile/Body/Timeline/profiles";
