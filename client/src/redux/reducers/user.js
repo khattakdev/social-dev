@@ -1,7 +1,7 @@
 import { LOGIN_USER } from "../actions/user";
 
 const intialState = {
-  email: "",
+  email: "akkhattak65@gmail.com",
   firstName: "",
   lastName: "",
   gender: "",

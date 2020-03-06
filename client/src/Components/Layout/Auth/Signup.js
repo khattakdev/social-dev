@@ -96,9 +96,9 @@ const Index = props => {
             margin="normal"
             variant="outlined"
           />
-          <Link className={classes.navLink} to="/profile">
-            <Button className={classes.Button}>Register</Button>
-          </Link>
+          <Button onClick={props.onSignup} className={classes.Button}>
+            Register
+          </Button>
         </div>
       )}
     </div>
