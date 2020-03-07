@@ -3,6 +3,7 @@ import Home from "./Container/Home";
 import Profile from "./Components/Profile";
 import Timeline from "./Container/Timeline";
 import Profiles from "./Components/Profile/Body/Timeline/profiles";
+import Snackbar from "./Container/Snackbar";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         {/* <Home /> */}
         {/* <Nav />
       <Top /> */}
+        <Snackbar />
         <Switch>
           <Route path="/profiles" component={Profiles} />
           <Route path="/timeline" component={Timeline} />

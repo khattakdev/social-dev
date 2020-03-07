@@ -7,6 +7,7 @@ import Login from "../../Components/Layout/Auth/Login";
 import Signup from "../../Components/Layout/Auth/Signup";
 
 import { loginUser } from "../../redux/actions/user";
+import { snackbarShow } from "../../redux/actions/layout";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -78,7 +79,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (email, password) => dispatch(loginUser(email, password))
+    loginUser: (email, password) => dispatch(loginUser(email, password)),
+    snackbarShow: (snackbarType, message) =>
+      dispatch(snackbarShow(snackbarType, message))
   };
 };
 
