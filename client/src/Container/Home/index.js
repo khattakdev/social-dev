@@ -7,7 +7,7 @@ import Login from "../../Components/Layout/Auth/Login";
 import Signup from "../../Components/Layout/Auth/Signup";
 
 import { loginUser } from "../../redux/actions/user";
-import { snackbarShow } from "../../redux/actions/layout";
+// import { snackbarShow } from "../../redux/actions/layout";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -47,6 +47,18 @@ class index extends Component {
       }
     });
   };
+
+  resetValuesHandler = () => {
+    this.setState({
+      userInfo: {
+        ...this.state.userInfo,
+        password: {
+          ...this.state.userInfo.password,
+          value: ""
+        }
+      }
+    });
+  };
   render() {
     // Just to avoid writing this.state everytime
     const userInfo = this.state.userInfo;
@@ -55,12 +67,13 @@ class index extends Component {
         <Auth authState={this.state.authState} tweakAuth={this.tweakAuthState}>
           {this.state.authState ? (
             <Login
-              onLogin={() =>
+              onLogin={() => {
                 this.props.loginUser(
                   userInfo.email.value,
                   userInfo.password.value
-                )
-              }
+                );
+                this.resetValuesHandler();
+              }}
               values={this.state.userInfo}
               onChangeHandler={this.onChangeHandler}
             />
@@ -79,9 +92,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (email, password) => dispatch(loginUser(email, password)),
-    snackbarShow: (snackbarType, message) =>
-      dispatch(snackbarShow(snackbarType, message))
+    loginUser: (email, password) => dispatch(loginUser(email, password))
+    // snackbarShow: (snackbarType, message) =>
+    //   dispatch(snackbarShow(snackbarType, message))
   };
 };
 

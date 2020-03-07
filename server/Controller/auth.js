@@ -196,7 +196,7 @@ exports.login = async (req, res) => {
 
     if (!user) {
       return res.status(401).json({
-        error: "Invalid Email"
+        error: ["Invalid Email"]
       });
     }
 
@@ -214,17 +214,17 @@ exports.login = async (req, res) => {
       );
 
       return res.status(200).json({
-        msg: "Successfully Logged In",
+        msg: ["Successfully Logged In"],
         token: token
       });
     } else {
       return res.status(401).json({
-        error: "Invalid Password"
+        error: ["Invalid Password"]
       });
     }
   } catch (error) {
     res.status(500).json({
-      error: "Server Error"
+      error: ["Server Error, Please Try Again Later"]
     });
   }
 };
