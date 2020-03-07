@@ -19,7 +19,6 @@ export const snackbarHide = () => dispatch => {
   dispatch({
     type: SNACBKAR_HIDE,
     snackbar: false,
-    snackbarType: "success",
     message: null
   });
 };

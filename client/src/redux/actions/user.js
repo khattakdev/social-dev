@@ -3,7 +3,7 @@ import * as layoutActions from "./layout";
 export const LOGIN_USER = "LOGIN_USER";
 
 export const loginUser = (email, password) => dispatch => {
-  dispatch(layoutActions.loadingStart);
+  dispatch(layoutActions.loadingStart());
   const config = {
     headers: {
       "Content-type": "application/json"
@@ -22,16 +22,27 @@ export const loginUser = (email, password) => dispatch => {
         type: LOGIN_USER,
         payload: {
           email,
-          password
+          password,
+          isAuth: true
         }
       });
-      dispatch(layoutActions.loadingEnd);
+      dispatch(layoutActions.loadingEnd());
       dispatch(layoutActions.snackbarShow("success", res.data.msg[0]));
     })
     .catch(err => {
-      dispatch(layoutActions.loadingEnd);
-      console.log(err.response.data.error[0]);
-      dispatch(layoutActions.snackbarShow("error", err.response.data.error[0]));
+      dispatch(layoutActions.loadingEnd());
+      if (err.response) {
+        return dispatch(
+          layoutActions.snackbarShow("error", err.response.data.error[0])
+        );
+      }
+      return dispatch(
+        layoutActions.snackbarShow(
+          "error",
+          "Internal Error, Please Try Again Later"
+        )
+      );
+
       // console.log(err.response);
     });
 };

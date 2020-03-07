@@ -1,6 +1,7 @@
 import { LOGIN_USER } from "../actions/user";
 
 const intialState = {
+  isAuth: false,
   email: "akkhattak65@gmail.com",
   firstName: "",
   lastName: "",
@@ -15,7 +16,8 @@ const reducer = (state = intialState, action) => {
     case LOGIN_USER: {
       return {
         ...state,
-        email: "akkhattak65@gmail.com"
+        email: action.payload.email,
+        isAuth: true
       };
     }
     case "LOGIN_USER2": {

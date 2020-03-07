@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import classes from "./index.module.scss";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import Home from "../../Components/Home";
 import Auth from "../../Components/Layout/Auth/index";
 import Login from "../../Components/Layout/Auth/Login";
 import Signup from "../../Components/Layout/Auth/Signup";
 
 import { loginUser } from "../../redux/actions/user";
-// import { snackbarShow } from "../../redux/actions/layout";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -60,10 +60,13 @@ class index extends Component {
     });
   };
   render() {
+    const redirect = this.props.isAuth ? <Redirect to="/profile" /> : null;
     // Just to avoid writing this.state everytime
     const userInfo = this.state.userInfo;
+
     return (
       <Home>
+        {redirect}
         <Auth authState={this.state.authState} tweakAuth={this.tweakAuthState}>
           {this.state.authState ? (
             <Login
@@ -87,14 +90,13 @@ class index extends Component {
 }
 
 const mapStateToProps = state => ({
-  email: state.user.email
+  email: state.user.email,
+  isAuth: state.user.isAuth
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     loginUser: (email, password) => dispatch(loginUser(email, password))
-    // snackbarShow: (snackbarType, message) =>
-    //   dispatch(snackbarShow(snackbarType, message))
   };
 };
 

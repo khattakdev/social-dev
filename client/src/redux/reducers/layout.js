@@ -21,6 +21,8 @@ const reducer = (state = initialState, action) => {
         snackbar: action.snackbar,
         message: action.message,
         snackbarType: action.snackbarType
+          ? action.snackbarType
+          : state.snackbarType
       };
     case LOADING_START:
     case LOADING_END:
