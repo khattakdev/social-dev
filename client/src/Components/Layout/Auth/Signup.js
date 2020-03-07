@@ -89,7 +89,7 @@ const Index = props => {
           />
           <TextField
             id="outlined-date-input"
-            label="Date"
+            label=""
             className={classes.textField}
             type="date"
             autoComplete="current-date"

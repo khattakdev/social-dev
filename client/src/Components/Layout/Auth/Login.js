@@ -17,8 +17,6 @@ const Index = props => {
           autoComplete="current-email"
           margin="normal"
           variant="outlined"
-          pattern="[A-Za-z]{3}"
-          title="Three letter country code"
           value={props.values.email.value}
           onChange={e => props.onChangeHandler(e)}
         />
