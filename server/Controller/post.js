@@ -15,8 +15,9 @@ function onError(res, error) {
 
 exports.getPosts = async (req, res) => {
   try {
-    const posts = await Post.find({ user: req.user });
-
+    const id = req.params.id || req.user;
+    let posts = await Post.find({ user: id });
+    posts = posts.reverse();
     res.status(200).json({
       msg: posts
     });
@@ -48,15 +49,20 @@ exports.newPost = async (req, res) => {
       });
     }
 
-    user.logs.push({
+    user.logs.unshift({
       message: "You created a new post",
       date: new Date()
     });
+    user.totalPosts++;
 
     await post.save();
     await user.save();
+
+    let posts = await Post.find({ user: req.user }).select("-__v");
+    posts = posts.reverse();
     return res.status(200).json({
-      msg: "Post Created Successfully"
+      msg: "Post Created Successfully",
+      posts
     });
   } catch (error) {
     onError(res, error);
@@ -82,10 +88,13 @@ exports.deletePost = async (req, res) => {
       });
     }
 
-    user.logs.push({
+    console.log("Reached at CP 1");
+    await user.logs.push({
       message: "You deleted a post",
-      date: new Date().getTime
+      date: new Date().getTime()
     });
+
+    await user.totalPosts--;
 
     await post.remove();
     await user.save();

@@ -3,8 +3,9 @@ import profile from "../../../assets/images/dp.jpg";
 import { ReactComponent as Camera } from "../../../assets/icons/camera.svg";
 import classes from "./index.module.scss";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 
-const index = () => {
+const index = props => {
   return (
     <div className={classes.top}>
       <div className={classes.cover}></div>
@@ -51,7 +52,9 @@ const index = () => {
             />
             <img className={classes.img} src={profile} alt="Profile" />
           </div>
-          <h2>Arsalan Khattak</h2>
+          <h2>
+            {props.firstName} {props.lastName}
+          </h2>
         </div>
         <ul>
           <li>
@@ -80,4 +83,9 @@ const index = () => {
   );
 };
 
-export default index;
+const mapStateToProps = state => ({
+  firstName: state.user.firstName,
+  lastName: state.user.lastName
+});
+
+export default connect(mapStateToProps)(index);

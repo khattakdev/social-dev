@@ -9,7 +9,7 @@ const index = props => {
     <>
       <Typography className={classes.log} component="p" variant="p">
         {props.children}
-        <Moment format="YYYY/MM/DD">{props.date}</Moment>
+        <Moment format="DD-MM-YYYY">{props.date}</Moment>
       </Typography>
       <Divider />
     </>

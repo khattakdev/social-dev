@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./index.module.scss";
 import { Card } from "@material-ui/core";
+import { connect } from "react-redux";
 import CardContent from "@material-ui/core/CardContent";
 import Log from "./log";
 
-const index = () => {
+import { loadUserData } from "../../../../redux/actions/user";
+import { loadingStart } from "../../../../redux/actions/layout";
+
+const Index = props => {
+  useEffect(() => {
+    if (localStorage.getItem("token") && !props.isAuth) {
+      props.loadingStart();
+      props.loadUserData();
+    }
+  }, []);
   return (
     <Card className={classes.card}>
       <CardContent className={classes.cardContent}>
-        <Log date="12/12/19">You Commented on Ali's Post</Log>
-        <Log date="10/11/19">You Liked Ahmed's Post</Log>
-        <Log date="05/09/19">You Disliked Zara's Profile</Log>
-        <Log date="04/07/19">You Commented on Haris' Post</Log>
-        <Log date="02/05/19">You Liked Haris' Profile</Log>
+        {props.logs.map(log => (
+          <Log key={log._id} date={log.date}>
+            {log.message}
+          </Log>
+        ))}
       </CardContent>
     </Card>
   );
 };
 
-export default index;
+const mapStateToProps = state => ({
+  isAuth: state.user.isAuth,
+  logs: state.user.logs
+});
+const mapDispatchToProps = dispatch => {
+  return {
+    loadUserData: (id, cb) => dispatch(loadUserData(id, cb)),
+    loadingStart: () => dispatch(loadingStart())
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Index);

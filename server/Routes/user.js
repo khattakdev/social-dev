@@ -41,4 +41,6 @@ router.post(
   userController.updatePhoto
 );
 
+router.get("/get/:id?", isAuth, userController.getUserData);
+
 module.exports = router;

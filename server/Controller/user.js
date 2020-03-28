@@ -150,7 +150,7 @@ exports.unlikeProfile = async (req, res) => {
 
 exports.getAllLikedProfiles = async (req, res) => {
   try {
-    const user = await user.findById(req.user);
+    const user = await User.findById(req.user);
 
     if (!user) {
       return res.status(404).json({
@@ -171,7 +171,8 @@ exports.getAllLikedProfiles = async (req, res) => {
 
 exports.getAllLikedPosts = async (req, res) => {
   try {
-    const user = await user.findById(req.user);
+
+    const user = await User.findById(req.user);
 
     if (!user) {
       return res.status(404).json({
@@ -188,4 +189,36 @@ exports.getAllLikedPosts = async (req, res) => {
       error: "Server Error"
     });
   }
+};
+
+exports.getUserData = async (req, res) => {
+  try {
+    const id = req.params.id || req.user;
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({
+        error: "Couldn't Verify you, Please Login again"
+      });
+    }
+
+    const responseUser = {
+      id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      gender: user.gender,
+      dob: user.dob,
+      logs: user.logs,
+      image: user.image,
+      likedProfiles: user.likedProfiles,
+      likedPosts: user.likedPosts,
+      totalPosts: user.totalPosts,
+      created: user.created_at
+    };
+
+    return res.status(200).json({
+      user: responseUser
+    });
+  } catch (error) {}
 };

@@ -4,7 +4,7 @@ const isAuth = require("../Middleware/auth");
 const postController = require("../Controller/post");
 const { body } = require("express-validator");
 
-router.get("/get", isAuth, postController.getPosts);
+router.get("/getall/:id?", isAuth, postController.getPosts);
 router.post(
   "/new",
   [
@@ -16,7 +16,7 @@ router.post(
   ],
   postController.newPost
 );
-router.post("/delete/:id", isAuth, postController.deletePost);
+router.delete("/delete/:id", isAuth, postController.deletePost);
 router.post(
   "/edit/:id",
   [

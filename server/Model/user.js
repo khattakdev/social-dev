@@ -25,7 +25,7 @@ const userSchema = new Schema(
     },
     image: {
       type: String,
-      default: "None",
+      default: "http://localhost:8080/uploads/default.png",
       require
     },
     logs: [
@@ -56,6 +56,10 @@ const userSchema = new Schema(
         ref: "Posts"
       }
     ],
+    totalPosts: {
+      type: Number,
+      default: 0
+    },
     passwordRecovery: {
       verificationCode: {
         type: String

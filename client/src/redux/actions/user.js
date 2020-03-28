@@ -1,6 +1,11 @@
 import axios from "../../axios";
 import * as layoutActions from "./layout";
+import { loadingEnd } from "./layout";
+import { LOADING_END } from "./layout";
 export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const LOAD_USER_DATA = "LOAD_USER_DATA";
+export const LOAD_USER_DATA_FAILED = "LOAD_USER_DATA_FAILED";
 
 export const loginUser = (email, password) => dispatch => {
   dispatch(layoutActions.loadingStart());
@@ -21,11 +26,11 @@ export const loginUser = (email, password) => dispatch => {
       dispatch({
         type: LOGIN_USER,
         payload: {
-          email,
-          password,
+          user: res.data.user,
           isAuth: true
         }
       });
+      localStorage.setItem("token", res.data.token);
       dispatch(layoutActions.loadingEnd());
       dispatch(layoutActions.snackbarShow("success", res.data.msg[0]));
     })
@@ -42,7 +47,41 @@ export const loginUser = (email, password) => dispatch => {
           "Internal Error, Please Try Again Later"
         )
       );
-
-      // console.log(err.response);
     });
+};
+
+export const loadUserData = (
+  userId = undefined,
+  cb = undefined
+) => dispatch => {
+  axios
+    .get(`/user/get${userId ? "/" + userId : ""}`)
+    .then(res => {
+      dispatch({
+        type: LOAD_USER_DATA,
+        payload: res.data
+      });
+      dispatch({
+        type: LOADING_END
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: LOAD_USER_DATA_FAILED
+      });
+      dispatch({
+        type: LOADING_END
+      });
+      cb();
+    });
+};
+
+export const logout = () => dispatch => {
+  localStorage.removeItem("token");
+  dispatch({
+    type: LOGOUT_USER
+  });
+  dispatch({
+    type: LOADING_END
+  });
 };

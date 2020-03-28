@@ -202,10 +202,15 @@ exports.login = async (req, res) => {
 
     const matchPassword = await bcrypt.compare(password, user.password);
 
+    // const salt = await bcrypt.genSalt(10);
+    // const hashedPassword = await bcrypt.hash(password, salt);
+
     if (matchPassword) {
       const token = jwt.sign(
         {
-          id: user.id
+          id: user.id,
+          email
+          // password: hashedPassword
         },
         key,
         {
@@ -213,9 +218,24 @@ exports.login = async (req, res) => {
         }
       );
 
+      const responseUser = {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        gender: user.gender,
+        dob: user.dob,
+        logs: user.logs,
+        image: user.image,
+        likedProfiles: user.likedProfiles,
+        likedPosts: user.likedPosts,
+        totalPosts: user.totalPosts,
+        created: user.created_at
+      };
       return res.status(200).json({
         msg: ["Successfully Logged In"],
-        token: token
+        token,
+        user: responseUser
       });
     } else {
       return res.status(401).json({
@@ -223,6 +243,7 @@ exports.login = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       error: ["Server Error, Please Try Again Later"]
     });

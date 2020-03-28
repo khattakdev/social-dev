@@ -7,7 +7,7 @@ import Auth from "../../Components/Layout/Auth/index";
 import Login from "../../Components/Layout/Auth/Login";
 import Signup from "../../Components/Layout/Auth/Signup";
 
-import { loginUser } from "../../redux/actions/user";
+import { loginUser, loadUserData} from "../../redux/actions/user";
 class index extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +27,12 @@ class index extends Component {
     };
 
     this.tweakAuthState = this.tweakAuthState.bind(this);
+  }
+
+  componentDidMount() {
+    if(localStorage.getItem('token')) {
+      this.props.loadUserData();
+    }
   }
 
   tweakAuthState = () => {
@@ -96,7 +102,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginUser: (email, password) => dispatch(loginUser(email, password))
+    loginUser: (email, password) => dispatch(loginUser(email, password)),
+    loadUserData: (id, cb) => dispatch(loadUserData(id, cb))
   };
 };
 

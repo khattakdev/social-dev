@@ -10,12 +10,12 @@ const index = () => {
   return (
     <div>
       <Switch>
-        <Route path="/profile/about" component={About} />
+        <Route path="/profile/about/:id?" component={About} />
         {/* <Route path="/profile/edit" component={Edit} /> */}
-        <Route path="/profile/likedprofiles" component={LikedProfiles} />
-        <Route path="/profile/likedposts" component={LikedPosts} />
-        <Route path="/profile/logs" component={Logs} />
-        <Route path="/profile/" component={Timeline} />
+        <Route path="/profile/likedprofiles/:id?" component={LikedProfiles} />
+        <Route path="/profile/likedposts/:id?" component={LikedPosts} />
+        <Route path="/profile/logs/:id?" component={Logs} />
+        <Route path="/profile/:id?" component={Timeline} />
       </Switch>
     </div>
   );

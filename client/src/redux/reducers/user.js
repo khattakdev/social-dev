@@ -1,29 +1,58 @@
-import { LOGIN_USER } from "../actions/user";
+import {LOAD_USER_DATA, LOGIN_USER, LOGOUT_USER} from "../actions/user";
 
 const intialState = {
   isAuth: false,
-  email: "akkhattak65@gmail.com",
-  firstName: "",
-  lastName: "",
-  gender: "",
-  image: "",
+  id: null,
+  email: null,
+  firstName: null,
+  lastName: null,
+  gender: null,
+  image: null,
+  posts: 0,
   logs: [],
-  dob: ""
+  dob: null,
+  likedPosts: [],
+  likedProfiles: [],
+  created: null
 };
 
 const reducer = (state = intialState, action) => {
   switch (action.type) {
-    case LOGIN_USER: {
+    case LOGIN_USER:
+    case LOAD_USER_DATA: {
+      const user = action.payload.user;
       return {
         ...state,
-        email: action.payload.email,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        gender: user.gender,
+        image: user.image,
+        logs: user.logs,
+        likedProfiles: user.likedProfiles,
+        likedPosts: user.likedPosts,
+        created: user.created,
+        dob: user.dob,
+        posts: user.totalPosts,
         isAuth: true
       };
     }
-    case "LOGIN_USER2": {
+    case LOGOUT_USER: {
       return {
         ...state,
-        email: "akkhattak65@gmail.com"
+        isAuth: false,
+        id: null,
+        email: null,
+        firstName: null,
+        lastName: null,
+        gender: null,
+        image: null,
+        posts: 0,
+        logs: [],
+        dob: null,
+        likedPosts: [],
+        likedProfiles: [],
+        created: null
       };
     }
     default: {
