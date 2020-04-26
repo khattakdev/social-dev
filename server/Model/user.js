@@ -5,84 +5,136 @@ const userSchema = new Schema(
   {
     firstName: {
       type: String,
-      required: true
+      required: true,
     },
     lastName: {
       type: String,
-      required: true
+      required: true,
     },
     email: {
       type: String,
-      required: true
+      required: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
     gender: {
       type: String,
-      required: true
+      required: true,
     },
     image: {
       type: String,
       default: "http://localhost:8080/uploads/default.png",
-      require
+      require,
     },
     logs: [
       {
         message: {
           type: String,
-          require
+          require,
         },
         date: {
           type: Date,
-          require
-        }
-      }
+          require,
+        },
+      },
     ],
     dob: {
       type: Date,
-      required: true
+      required: true,
     },
     likedProfiles: [
       {
         type: Schema.Types.ObjectId,
-        ref: "User"
-      }
+        ref: "User",
+      },
     ],
     likedPosts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Posts"
-      }
+        ref: "Posts",
+      },
     ],
     totalPosts: {
       type: Number,
-      default: 0
+      default: 0,
     },
     passwordRecovery: {
       verificationCode: {
-        type: String
+        type: String,
       },
       lastSent: {
         type: Date,
-        default: new Date().setFullYear(0, 1, 1)
-      }
+        default: new Date().setFullYear(0, 1, 1),
+      },
     },
     verification: {
       isVerified: {
         type: Boolean,
         require,
-        default: false
+        default: false,
       },
       verificationCode: {
-        type: String
+        type: String,
       },
       lastCodeSent: {
         type: Date,
-        require
-      }
-    }
+        require,
+      },
+    },
+    about: {
+      type: String,
+      default: "Write Something about you",
+    },
+    education: [
+      {
+        institute: {
+          type: String,
+          require,
+        },
+        from: {
+          type: Date,
+          require,
+        },
+        to: {
+          type: Date,
+        },
+        current: {
+          type: Boolean,
+          default: true,
+        },
+        current: {
+          type: Boolean,
+          default: true,
+        },
+        description: {
+          type: "String",
+        },
+      },
+    ],
+    employment: [
+      {
+        company: {
+          type: String,
+          require,
+        },
+        from: {
+          type: Date,
+          require,
+        },
+        to: {
+          type: Date,
+        },
+        current: {
+          type: Boolean,
+          default: true,
+        },
+        description: {
+          type: "String",
+        },
+      },
+    ],
   },
   { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
