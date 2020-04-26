@@ -1,13 +1,13 @@
 import React from "react";
 import { Card, Divider } from "@material-ui/core";
-import classes from "../../index.module.scss";
+import classes from "../index.module.scss";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
-import TextField from "../../../../Components/Layout/TextArea";
-import Button from "../../../../Components/Layout/Button";
-import { ReactComponent as EditIcon } from "../../../../assets/icons/edit.svg";
+import TextField from "../../Layout/TextArea";
+import Button from "../../Layout/Button";
+import { ReactComponent as EditIcon } from "../../../assets/icons/edit.svg";
 
-const education = props => {
+const education = (props) => {
   return (
     <Card className={classes.card}>
       <CardContent>
