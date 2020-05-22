@@ -8,7 +8,7 @@ import { ReactComponent as HeartIcon } from "../../../../../assets/icons/heart.s
 import { ReactComponent as HeartBorderIcon } from "../../../../../assets/icons/heart-border.svg";
 import profile from "../../../../../assets/images/dp.jpg";
 
-const Index = props => {
+const Index = (props) => {
   const [currentHeart, setCurrentHeart] = useState(true);
   const [showPopUp, setShowPop] = useState(false);
 
@@ -49,7 +49,7 @@ const Index = props => {
               variant="div"
               component="div"
             >
-              <Typography component="p" variant="p">
+              <Typography component="p" variant="subtitle1">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
                 text ever since the 1500s, when an unknown printer took a galley
